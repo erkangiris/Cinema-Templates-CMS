@@ -1,0 +1,71 @@
+{
+  "branchs": "Şubeler",
+  "branch": "Şube",
+  "home": "Anasayfa",
+  "contentSettings": "İçerik Ayarları",
+  "banner": "Banner",
+  "bannerManagement": "Banner Yönetimi",
+  "sliderPage": "Slider Yönetimi",
+  "news": "Haberler",
+
+  "contentPages": "Sayfa İçerikleri",
+  "content": "Sayfa",
+  "campaign": "Kampanyalar",
+  "nextProgram": "Gelecek Program",
+
+  "members": "Üyeler",
+  "adminUser": "Üye Listesi",
+  "bulten": "E-Bülten Listesi",
+
+  "siteSettings": "Ayarlar",
+
+  "addNew": "Yeni Ekle",
+  "edit": "Düzenle",
+  "delete": "Sil",
+  "cancel": "İptal",
+
+  "requiredField" : "Zorunlu Alan",
+
+  "successMsg": "İşlem Başarılı",
+  "errorMsg" : "Hatalı İşlem",
+
+  "logOut": "Çıkış",
+  
+  "narrow": "Daralt",
+
+
+  "name": "Adı",
+  "desc": "Açıklama",
+  "tel": "Telefon",
+  "adress": "Adres",
+  "email": "Email",
+  "local": "Konum",
+  "choose": "Seçiniz",
+  "img": "Görsel",
+  "vision": "Vizyon",
+  "date": "Tarih",
+  "link": "Url Link",
+  "type": "Tip",
+  "start": "Başlangıç",
+  "end": "Bitiş",
+  "activity": "Aktiflik",
+  "button": "Button",
+  "text": "Yazısı",
+  "language": "Dil",
+  "detail": "Detay",
+  "summary": "Kapak",
+
+  "search": "Arayınız...",
+
+  "tvSeriesDetail": "Dizi Detayları",
+  "inTheaters": "Tiyatrolarda",
+  
+  "confidentialityAgreement": "Gizlilik Sözleşmesi",
+  "cookiePolicy": "Çerez Politikası",
+  "aboutUs": "Hakkımızda",
+
+
+  "demo": {
+    "title": "Turkish"
+  }
+}
