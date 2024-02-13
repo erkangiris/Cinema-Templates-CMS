@@ -69,17 +69,17 @@ export default function UserNewEditForm({ currentUser }) {
     fetchDataLanguages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // console.log("Cntent Page Id : ",contentPagesId);
+  console.log(languages,'languages')
 
   const { enqueueSnackbar } = useSnackbar();
-
   const NewUserSchema = Yup.object().shape({
     contentTitle: Yup.string().required(t('requiredField')),
     contents: Yup.string().required(t('requiredField')),
     seoUrl: Yup.string().required(t('requiredField')),
     isActive: Yup.string().required(t('requiredField')),
     contentType: Yup.mixed().required(t('requiredField')),
+    language: Yup.string().required(t('requiredField')),
+
     // ImageFile: Yup.mixed().required('ImageFile is required'),
   });
 
@@ -121,7 +121,7 @@ export default function UserNewEditForm({ currentUser }) {
       setValue('isActive', contentPagesId?.isActive);
       setValue('contents', contentPagesId?.contents);
       setValue('contentType', CONTENT_TYPES.find(item => item.value === contentPagesId?.contentType)?.value || '' );
-      setValue('Language', languages?.find(item => item.id ===contentPagesId?.language)?.id || '' );
+      setValue('language', languages?.find(item => item.id ===contentPagesId?.language)?.id || '' );
     }
   }, [contentPagesId, setValue, id,CONTENT_TYPES,languages]);
   
@@ -228,18 +228,17 @@ export default function UserNewEditForm({ currentUser }) {
 
               <RHFSelect
                 native
-                name="Language"
+                name="language"
                 label={`${t('language')} ${t('type')}`}
                 InputLabelProps={{ shrink: true }}
               >
                 <option value="">{`${t('language')} ${t('choose')}`}</option>
                 {languages?.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.lang}
+                    {item.name}
                   </option>
                 ))}
               </RHFSelect>
-
               <RHFSwitch
                 name="isActive"
                 labelPlacement="start"

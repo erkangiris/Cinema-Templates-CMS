@@ -34,13 +34,13 @@ export default function UserTableRow({
   const { t } = useLocales();
 
   const popover = usePopover();
-
+  console.log(row)
   return (
     <>
       <TableRow hover selected={selected}>
 
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{contentTitle}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.title}</TableCell>
 
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
           <Avatar alt={contentTitle} src={imageUrl} sx={{ borderRadius: '16px', width: '60%' }} />
@@ -97,7 +97,7 @@ export default function UserTableRow({
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t('delete')}
         content="Silmek istediğinizden emin misiniz ?"
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>

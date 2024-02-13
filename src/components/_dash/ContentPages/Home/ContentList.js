@@ -62,18 +62,16 @@ const defaultFilters = {
 // ----------------------------------------------------------------------
 
 export default function UserListView({data}) {
+  console.log(data);
   const table = useTable();
-
   const router = useRouter();
-
   const confirm = useBoolean();
-
   const { t } = useLocales();
 
   const TABLE_HEAD = [
     { id: 'name', label:  t('name'), width: 500  },
     { id: 'img', label:  t('img'), width: 500 },
-    // { id: 'translate', label: 'Çeviriler', width: 50},
+    { id: 'translate', label: 'Çeviriler', width: 50},
     { id: '', width: 50},
   ];
 

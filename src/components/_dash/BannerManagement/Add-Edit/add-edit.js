@@ -56,9 +56,20 @@ export default function UserNewEditForm({ currentUser }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const [languages, setLanguages] = useState([]);
 
-  // console.log("Banner Id : ",bannerDataId);
-
+  const fetchDataLanguages = async () => {
+    const { data } = await WebServices.getAllLanguages();
+    setLanguages(data);
+    console.log(data)
+  };
+  useEffect(() => {
+    if (id) {
+      fetchData();
+    }
+    fetchDataLanguages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
@@ -66,7 +77,8 @@ export default function UserNewEditForm({ currentUser }) {
     StartDate: Yup.date().required(t('requiredField')).typeError(''),
     EndDate: Yup.date().required(t('requiredField')).typeError(''),
     Url: Yup.string().required(t('requiredField')),
-    BannerType: Yup.string().required(t('requiredField')),
+    // BannerType: Yup.string().required(t('requiredField')),
+    Language: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
   });
 
@@ -76,7 +88,8 @@ export default function UserNewEditForm({ currentUser }) {
       StartDate: new Date(),
       EndDate: new Date(),
       Url: '',
-      BannerType: 0,
+      // BannerType: 0,
+      Language: '',
       ImageFile: null,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,13 +124,14 @@ export default function UserNewEditForm({ currentUser }) {
       setValue('StartDate', parseISO(bannerDataId?.startDate));
       setValue('EndDate', parseISO(bannerDataId?.endDate));
       setValue('Url', bannerDataId?.url);
-      setValue(
-        'BannerType',
-        BANNER_TYPES.find((item) => item.value === bannerDataId?.bannerType)?.value || 0
-      );
+      // setValue(
+      //   'BannerType',
+      //   BANNER_TYPES.find((item) => item.value === bannerDataId?.bannerType)?.value || 0
+      // );
+      setValue('Language', languages?.find(item => item.id ===bannerDataId?.language)?.id || '' );
       setValue('ImageFile', bannerDataId?.imageUrl);
     }
-  }, [bannerDataId, setValue, id, BANNER_TYPES]);
+  }, [bannerDataId, setValue, id, BANNER_TYPES, languages]);
 
   const onSubmit = useCallback(async () => {
     const isForm = true;
@@ -204,17 +218,17 @@ export default function UserNewEditForm({ currentUser }) {
               }}
             >
               <RHFTextField name="Title" label={t('name')} />
-              {/* <RHFTextField name="bannerType" label="Banner Tipi" type="number" /> */}
+              {/* <RHFTextField name="bannerType" label="Banner Tipi" type="number" /> 
               <RHFSelect name="BannerType" label="Banner Tipi">
                 {/* <MenuItem value="">Banner Seçiniz</MenuItem> */}
-                {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
+                {/* <Divider sx={{ borderStyle: 'dashed' }} /> 
                 {BANNER_TYPES.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.name}
                   </MenuItem>
                 ))}
               </RHFSelect>
-              {/* <RHFSelect
+              <RHFSelect
                 native
                 name="BannerType"
                 label={`${t('banner')} ${t('type')}`}
@@ -277,6 +291,19 @@ export default function UserNewEditForm({ currentUser }) {
               </Stack>
 
               <RHFTextField name="Url" label={t('link')} />
+              <RHFSelect
+                native
+                name="Language"
+                label={`${t('language')} ${t('type')}`}
+                InputLabelProps={{ shrink: true }}
+              >
+                <option value="">{`${t('language')} ${t('choose')}`}</option>
+                {languages?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </RHFSelect>
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
