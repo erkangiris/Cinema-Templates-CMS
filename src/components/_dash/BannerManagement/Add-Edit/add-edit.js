@@ -76,9 +76,8 @@ export default function UserNewEditForm({ currentUser }) {
     Title: Yup.string().required(t('requiredField')),
     StartDate: Yup.date().required(t('requiredField')).typeError(''),
     EndDate: Yup.date().required(t('requiredField')).typeError(''),
-    Url: Yup.string().required(t('requiredField')),
-    // BannerType: Yup.string().required(t('requiredField')),
-    Language: Yup.string().required(t('requiredField')),
+    Url: Yup.string(),
+    // Language: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
   });
 
@@ -128,7 +127,7 @@ export default function UserNewEditForm({ currentUser }) {
       //   'BannerType',
       //   BANNER_TYPES.find((item) => item.value === bannerDataId?.bannerType)?.value || 0
       // );
-      setValue('Language', languages?.find(item => item.id ===bannerDataId?.language)?.id || '' );
+      // setValue('Language', languages?.find(item => item.id ===bannerDataId?.language)?.id || '' );
       setValue('ImageFile', bannerDataId?.imageUrl);
     }
   }, [bannerDataId, setValue, id, BANNER_TYPES, languages]);
@@ -218,30 +217,6 @@ export default function UserNewEditForm({ currentUser }) {
               }}
             >
               <RHFTextField name="Title" label={t('name')} />
-              {/* <RHFTextField name="bannerType" label="Banner Tipi" type="number" /> 
-              <RHFSelect name="BannerType" label="Banner Tipi">
-                {/* <MenuItem value="">Banner Seçiniz</MenuItem> */}
-                {/* <Divider sx={{ borderStyle: 'dashed' }} /> 
-                {BANNER_TYPES.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.name}
-                  </MenuItem>
-                ))}
-              </RHFSelect>
-              <RHFSelect
-                native
-                name="BannerType"
-                label={`${t('banner')} ${t('type')}`}
-                InputLabelProps={{ shrink: true }}
-              >
-               
-                {BANNER_TYPES.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.name}
-                  </option>
-                ))}
-              </RHFSelect> */}
-              {/* <RHFTextField name="startDate" label="Başlama Tarihi" /> */}
               <Stack spacing={1.5}>
                 <Controller
                   name="StartDate"
@@ -291,7 +266,7 @@ export default function UserNewEditForm({ currentUser }) {
               </Stack>
 
               <RHFTextField name="Url" label={t('link')} />
-              <RHFSelect
+              {/* <RHFSelect
                 native
                 name="Language"
                 label={`${t('language')} ${t('type')}`}
@@ -303,7 +278,7 @@ export default function UserNewEditForm({ currentUser }) {
                     {item.name}
                   </option>
                 ))}
-              </RHFSelect>
+              </RHFSelect> */}
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
@@ -313,14 +288,6 @@ export default function UserNewEditForm({ currentUser }) {
             </Stack>
           </Card>
         </Grid>
-      </Grid>
-      <Grid xs={12}>
-        {/* <code>{JSON.stringify(values.BannerType, null, 2)}</code> */}
-        {/* <br />
-      <br />
-      <code>post ImgFile : {JSON.stringify(values.ImageFile, null, 2)}</code>
-      <br />
-      <br /> */}
       </Grid>
     </FormProvider>
   );

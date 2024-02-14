@@ -17,7 +17,6 @@ import { WebServices } from 'src/utils/requests';
 import { useEffect, useState } from 'react';
 import BrachList from '../../../components/_dash/Branch/Main/BranchList';
 
-// ----------------------------------------------------------------------
 
 export default function UserListView() {
   const settings = useSettingsContext();
@@ -34,7 +33,7 @@ export default function UserListView() {
     fetchData();
   }, []);
 
-  // console.log("branchs", res_data);
+  console.log("branchs", res_data);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
@@ -59,7 +58,6 @@ export default function UserListView() {
           mb: { xs: 3, md: 5 },
         }}
       />
-      {/* <BrachList data={totalSales?.data.length > 0 ? totalSales.data : []} /> */}
       <BrachList data={res_data}  />
 
     </Container>

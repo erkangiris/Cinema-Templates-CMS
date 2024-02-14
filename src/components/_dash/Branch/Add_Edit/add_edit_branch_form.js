@@ -27,7 +27,6 @@ import { WebServices } from 'src/utils/requests';
 
 import { useLocales } from 'src/locales';
 
-// ----------------------------------------------------------------------
 
 export default function UserNewEditForm() {
   const router = useRouter();
@@ -58,7 +57,6 @@ export default function UserNewEditForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log('id brach data : ', allBranchs);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -72,27 +70,6 @@ export default function UserNewEditForm() {
     BiletinialBranchId: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
   });
-
-  // const defaultValues = useMemo(
-  //   () => ({
-  //     id: '7',
-  //     BranchName: 'Kurtuluş Park Cinema',
-  //     BranchDescription: 'kurtulul bir sinema',
-  //     Address: 'kurtuluş parkında alt kat',
-  //     Phone: '121231231',
-  //     Email: 'kurtulus@gmail.com',
-  //     Location: 'çankatau kurtuluş',
-  //     biletinialBranchId: '1',
-  //     createdBy: "Mehmet Celal",
-  //     createdOn: new Date(),
-  //     modifiedBy: 'Mehmet Celal Tarafından',
-  //     modifiedOn: new Date(),
-  //     ImageFile: '-',
-  //     isDeleted: false,
-  //   }),
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   [id, branchIdData]
-  // );
 
   const defaultValues = useMemo(
     () => ({
@@ -132,36 +109,22 @@ export default function UserNewEditForm() {
       setValue('Phone', branchIdData?.phone || '');
       setValue('Email', branchIdData?.email || '');
       setValue('Location', branchIdData?.location || '');
-      // setValue('biletinialBranchId', branchIdData?.biletinialBranchId || '');
-      setValue(
-        'BiletinialBranchId',
-        allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name ||
-          'Şube Silinmiş ve ya Bulunamadı'
-      );
-      setSelectetBranchId(
-        allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name || null
-      );
+      setValue('biletinialBranchId', branchIdData?.biletinialBranchId || '');
+      // setValue(
+      //   'BiletinialBranchId',
+      //   allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name ||
+      //     'Şube Silinmiş ve ya Bulunamadı'
+      // );
+      // setSelectetBranchId(
+      //   allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name || null
+      // );
       setValue('ImageFile', branchIdData?.imageUrl || '-');
     }
   }, [branchIdData, setValue, id, allBranchs]);
 
   const values = watch();
 
-  // const onSubmit = useCallback(
-  //   async (data) => {
-  //     console.log("data values : ", data);
-  //     try {
-  //       await new Promise((resolve) => setTimeout(resolve, 500));
-  //       reset();
-  //       enqueueSnackbar(currentUser ? 'Update success!' : 'Create success!');
-  //       router.push(paths.dashboard.branchs.root);
-  //       console.info('DATA', data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   },
-  //   [currentUser, enqueueSnackbar, reset, router]
-  // );
+  
 
   const onSubmit = useCallback(async () => {
     const isForm = true;
@@ -211,15 +174,6 @@ export default function UserNewEditForm() {
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {/* {currentUser && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )} */}
-
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
                 name="ImageFile"
@@ -236,8 +190,7 @@ export default function UserNewEditForm() {
                       color: 'text.disabled',
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    1920x700px boyutunda, *.jpeg, *.jpg, *.png, *.gif türleinde ve maximum {fData(3145728)} boyutunda olmalıdır.
                   </Typography>
                 }
               />
@@ -304,17 +257,10 @@ export default function UserNewEditForm() {
             </Stack>
           </Card>
         </Grid>
-        <Grid xs={12}>
-          {/* <code>{JSON.stringify(values.biletinialBranchId)}</code> */}
-          {/* <br /> */}
-          {/* <br /> */}
-          {/* <code> selectedItem: {selectedBranchId}</code> */}
-        </Grid>
+
       </Grid>
     </FormProvider>
   );
 }
 
-// UserNewEditForm.propTypes = {
-//   currentUser: PropTypes.object,
-// };
+

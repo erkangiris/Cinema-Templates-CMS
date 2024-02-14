@@ -78,7 +78,7 @@ export default function UserNewEditForm({ currentUser }) {
     seoUrl: Yup.string().required(t('requiredField')),
     isActive: Yup.string().required(t('requiredField')),
     contentType: Yup.mixed().required(t('requiredField')),
-    language: Yup.string().required(t('requiredField')),
+    // language: Yup.string().required(t('requiredField')),
 
     // ImageFile: Yup.mixed().required('ImageFile is required'),
   });
@@ -121,7 +121,7 @@ export default function UserNewEditForm({ currentUser }) {
       setValue('isActive', contentPagesId?.isActive);
       setValue('contents', contentPagesId?.contents);
       setValue('contentType', CONTENT_TYPES.find(item => item.value === contentPagesId?.contentType)?.value || '' );
-      setValue('language', languages?.find(item => item.id ===contentPagesId?.language)?.id || '' );
+      // setValue('language', languages?.find(item => item.id ===contentPagesId?.language)?.id || '' );
     }
   }, [contentPagesId, setValue, id,CONTENT_TYPES,languages]);
   
@@ -226,7 +226,7 @@ export default function UserNewEditForm({ currentUser }) {
                 ))}
               </RHFSelect>
 
-              <RHFSelect
+              {/* <RHFSelect
                 native
                 name="language"
                 label={`${t('language')} ${t('type')}`}
@@ -238,7 +238,7 @@ export default function UserNewEditForm({ currentUser }) {
                     {item.name}
                   </option>
                 ))}
-              </RHFSelect>
+              </RHFSelect> */}
               <RHFSwitch
                 name="isActive"
                 labelPlacement="start"

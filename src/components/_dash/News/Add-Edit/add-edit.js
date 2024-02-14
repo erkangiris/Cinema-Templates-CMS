@@ -17,7 +17,7 @@ import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hook';
 
 import { useSnackbar } from 'src/components/snackbar';
-import FormProvider, { RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
+import FormProvider, { RHFEditor, RHFTextField, RHFUploadAvatar } from 'src/components/hook-form';
 import { useParams } from 'react-router';
 import { WebServices } from 'src/utils/requests';
 import { useLocales } from 'src/locales';
@@ -51,17 +51,15 @@ export default function UserNewEditForm() {
 
   const NewUserSchema = Yup.object().shape({
     Title: Yup.string().required(t('requiredField')),
-    Summary: Yup.string().required(t('requiredField')),
-    Description: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
-    CoverImageFile: Yup.mixed().required(t('requiredField')),
+    contents: Yup.string().required(t('requiredField')),
   });
 
   const defaultValues = useMemo(
     () => ({
       Title: '',
-      Summary: '',
-      Description: '',
+      Summary: null,
+      Description: null,
       ImageFile: null,
       CoverImageFile: null,
     }),
@@ -89,10 +87,8 @@ export default function UserNewEditForm() {
     if (id) {
       setValue('Id', newId?.id);
       setValue('Title', newId?.title);
-      setValue('Summary', newId?.summary);
-      setValue('Description', newId?.description);
+      setValue('Contents', newId?.contents);
       setValue('ImageFile', newId?.imageUrl);
-      setValue('CoverImageFile', newId?.coverImageUrl);
     }
   }, [newId, setValue, id]);
 
@@ -181,7 +177,7 @@ export default function UserNewEditForm() {
             </Box>
           </Card>
 
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
+          {/* <Card sx={{ pt: 10, pb: 5, px: 3 }}>
             <Box sx={{ mb: 5 }}>
               <Typography variant="subtitle2">Kapak Resim</Typography>
               <RHFUploadAvatar
@@ -205,7 +201,7 @@ export default function UserNewEditForm() {
                 }
               />
             </Box>
-          </Card>
+          </Card> */}
         </Grid>
 
         <Grid xs={12} md={8}>
@@ -221,8 +217,9 @@ export default function UserNewEditForm() {
               }}
             >
               <RHFTextField name="Title" label={t('name')} />
-              <RHFTextField name="Summary" label={t('summary')} />
-              <RHFTextField name="Description" label={t('desc')} />
+              {/* <RHFTextField name="Summary" label={t('summary')} /> */}
+              <RHFEditor simple name="contents" />
+              {/* <RHFTextField name="Description" label={t('desc')} /> */}
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>

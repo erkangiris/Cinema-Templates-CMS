@@ -54,7 +54,6 @@ const defaultFilters = {
 // ----------------------------------------------------------------------
 
 export default function UserListView({ data }) {
-  // console.log("branch data : ",data);
 
   const table = useTable();
 
