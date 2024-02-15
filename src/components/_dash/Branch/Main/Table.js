@@ -20,12 +20,11 @@ import { useLocales } from 'src/locales';
 // ----------------------------------------------------------------------
 
 export default function BranchTable({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
-  const { branchName, phone, address,imageUrl} = row;
+  const { name, phone, address,imageUrl} = row;
 
   const confirm = useBoolean();
 
   const { t } = useLocales();
-
 
   const popover = usePopover();
 
@@ -33,19 +32,15 @@ export default function BranchTable({ row, selected, onEditRow, onSelectRow, onD
     <>
       <TableRow hover selected={selected}>
 
-        {/* <TableCell padding="checkbox">
-          <Checkbox checked={selected} onClick={onSelectRow} />
-        </TableCell> */}
 
-    
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{branchName}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{name}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{phone}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{address}</TableCell>
 
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar alt={branchName} src={imageUrl} sx={{ borderRadius: '16px', width: '60%' }} />
+          <Avatar alt={name} src={imageUrl} sx={{ borderRadius: '16px', width: '60%', fontWeight:'bold' }} />
         </TableCell>
 
         <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>

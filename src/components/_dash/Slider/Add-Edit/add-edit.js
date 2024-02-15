@@ -35,9 +35,7 @@ import { useLocales } from 'src/locales';
 
 export default function UserNewEditForm({ currentUser }) {
   const router = useRouter();
-
   const { id } = useParams();
-
   const { t } = useLocales();
 
   const [sliderId, setSliderId] = useState(null);
@@ -75,6 +73,11 @@ export default function UserNewEditForm({ currentUser }) {
     ButtonText: Yup.string().required(t('requiredField')),
     Language: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
+    FilmId: Yup.mixed(),
+    EditorRate: Yup.mixed(),
+    BiletinialRate: Yup.mixed(),
+    FragmanUrl: Yup.mixed(),
+    MobilImageFile: Yup.mixed().required(t('requiredField')),
   });
 
 
@@ -86,8 +89,13 @@ export default function UserNewEditForm({ currentUser }) {
       StartDate: new Date(),
       EndDate: new Date(),
       Url: '',
+      FilmId: '',
+      EditorRate: '',
+      BiletinialRate: '',
+      FragmanUrl: '',
       ButtonText: '',
       ImageFile: null,
+      MobilImageFile: null,
       Language: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,6 +128,11 @@ export default function UserNewEditForm({ currentUser }) {
       setValue('Url', sliderId?.url);
       setValue('ButtonText', sliderId?.buttonText);
       setValue('ImageFile', sliderId?.imageUrl);
+      setValue('MobilImageFile', sliderId?.MobilImageFile);
+      setValue('FilmId', sliderId?.FilmId);
+      setValue('EditorRate', sliderId?.EditorRate);
+      setValue('BiletinialRate', sliderId?.BiletinialRate);
+      setValue('FragmanUrl', sliderId?.BiletinialRate);
       setValue('Language', languages?.find(item => item.id ===sliderId?.language)?.id || '' );
     }
   }, [sliderId, setValue, id,languages]);
@@ -163,13 +176,27 @@ export default function UserNewEditForm({ currentUser }) {
     },
     [setValue]
   );
+  const handleDrop2 = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
 
+      const newFile = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
+
+      if (file) {
+        setValue('MobilImageFile', newFile, { shouldValidate: true });
+      }
+    },
+    [setValue]
+  );
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            <Box sx={{ mb: 5 }}>
+            <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
+              <Typography variant="h5">Masaüstü Görsel</Typography>
               <RHFUploadAvatar
                 name="ImageFile"
                 maxSize={3145728}
@@ -191,6 +218,31 @@ export default function UserNewEditForm({ currentUser }) {
                 }
               />
             </Box>
+            <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
+            <Typography variant="h5">Mobil Görsel</Typography>
+              <RHFUploadAvatar
+                name="MobilImageFile"
+                maxSize={3145728}
+                onDrop={handleDrop2}
+                helperText={
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      mt: 3,
+                      mx: 'auto',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'text.disabled',
+                    }}
+                  >
+                    Allowed *.jpeg, *.jpg, *.png, *.gif
+                    <br /> max size of {fData(3145728)}
+                  </Typography>
+                }
+              />
+            </Box>
+
+
           </Card>
         </Grid>
 
@@ -207,6 +259,10 @@ export default function UserNewEditForm({ currentUser }) {
             >
               <RHFTextField name="Title" label={t('name')} />
               <RHFTextField name="Description" label={t('desc')} />
+              <RHFTextField name="FilmId" label='Film ID' />
+              <RHFTextField name="EditorRate" label='Editör Puanı' />
+              <RHFTextField name="BiletinialRate" label='Biletinial Puanı' />
+              <RHFTextField name="FragmanUrl" label='Fragman' />
               <Stack spacing={1.5}>
                 <Controller
                   name="StartDate"

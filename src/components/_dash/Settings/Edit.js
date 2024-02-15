@@ -194,32 +194,32 @@ export default function UserNewEditForm({ currentUser }) {
           <RHFTextField name="location" label="Lokasyon" />
           {/* <RHFTextField name="language" label="Dil" /> */}
           <RHFSelect
-            native
-            name="language"
-            label={`${t('language')} ${t('type')}`}
-            InputLabelProps={{ shrink: true }}
-          >
-            <option value="">{`${t('language')} ${t('choose')}`}</option>
-            {languages?.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.lang}
-              </option>
-            ))}
-          </RHFSelect>
+                native
+                name="language"
+                label={`${t('language')} ${t('type')}`}
+                InputLabelProps={{ shrink: true }}
+              >
+                <option value="">{`${t('language')} ${t('choose')}`}</option>
+                {languages?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </RHFSelect>
 
-          <RHFSelect
-            native
-            name="defaultLanguage"
-            label="Varsayılan Dil"
-            InputLabelProps={{ shrink: true }}
-          >
-            <option value="">{`${t('language')} ${t('choose')}`}</option>
-            {languages?.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.lang}
-              </option>
-            ))}
-          </RHFSelect>
+              <RHFSelect
+                native
+                name="defaultLanguage"
+                label="Varsayılan Dil"
+                InputLabelProps={{ shrink: true }}
+              >
+                <option value="">Varsayılan Dil</option>
+                {languages?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </RHFSelect>
           {/* <RHFTextField name="defaultLanguage" label="Varsayılan Dil" /> */}
         </Box>
 
@@ -228,7 +228,6 @@ export default function UserNewEditForm({ currentUser }) {
             Ayarları Düzenle
           </LoadingButton>
         </Stack>
-        <code>{JSON.stringify(values, null, 2)}</code>
       </Card>
     </FormProvider>
   );

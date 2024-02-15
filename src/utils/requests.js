@@ -85,7 +85,7 @@ const WebServices = {
   // ** Banners
   getAllBanners: (params) => WebServices.get('Banner/Get', params),
   getBannerId: (params) => WebServices.get('Banner/GetById', params),
-  CreateBanner: (params, isForm) => WebServices.post('Banner/Create', params, isForm),
+  CreateBanner: (params, isForm) => WebServices.post('BannerLang/Create', params, isForm),
   UpdateBanner: (params, isForm) => WebServices.put('Banner/Update', params, isForm),
   DeleteBanner: (params) => WebServices.delete(`Banner/Delete/${params.Id}`),
 
