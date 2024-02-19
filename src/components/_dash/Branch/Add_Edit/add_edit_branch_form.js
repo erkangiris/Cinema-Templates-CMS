@@ -19,6 +19,7 @@ import { useRouter } from 'src/routes/hook';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, {
   RHFAutocomplete,
+   RHFEditor,
    RHFTextField,
   RHFUploadAvatar,
 } from 'src/components/hook-form';
@@ -209,7 +210,7 @@ export default function UserNewEditForm() {
               }}
             >
               <RHFTextField name="BranchName" label={t('name')} />
-              <RHFTextField name="BranchDescription" label={t('desc')} />
+             
               <RHFTextField name="Address" label={t('adress')} />
               <RHFTextField name="Phone" label={t('tel')} />
               <RHFTextField name="Email" label={t('Email')} />
@@ -250,7 +251,11 @@ export default function UserNewEditForm() {
               />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Box sx={{ mt: 3 }}>
+            <RHFEditor simple name="BranchDescription" />
+            </Box>
+
+            <Stack alignItems="flex-end" sx={{mt:3}}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!id ? t('addNew') : t('edit')}
               </LoadingButton>
