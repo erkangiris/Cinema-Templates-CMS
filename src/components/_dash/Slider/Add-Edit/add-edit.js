@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -38,19 +39,18 @@ export default function UserNewEditForm({ currentUser }) {
   const { id } = useParams();
   const { t } = useLocales();
 
-  const [sliderId, setSliderId] = useState(null);
+  const [popupID, setpopupID] = useState(null);
   const [languages, setLanguages] = useState([]);
 
 
   const fetchData = async () => {
-    const { data } = await WebServices.getSliderId({id });
-    setSliderId(data);
+    const { data } = await WebServices.getpopupID({id });
+    setpopupID(data);
   };
 
   const fetchDataLanguages = async () => {
     const { data } = await WebServices.getAllLanguages();
     setLanguages(data);
-    console.log(data)
   };
 
   useEffect(() => {
@@ -58,7 +58,6 @@ export default function UserNewEditForm({ currentUser }) {
       fetchData();
     }
     fetchDataLanguages()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -73,10 +72,10 @@ export default function UserNewEditForm({ currentUser }) {
     ButtonText: Yup.string().required(t('requiredField')),
     Language: Yup.string().required(t('requiredField')),
     ImageFile: Yup.mixed().required(t('requiredField')),
-    FilmId: Yup.mixed(),
-    EditorRate: Yup.mixed(),
-    BiletinialRate: Yup.mixed(),
-    FragmanUrl: Yup.mixed(),
+    // FilmId: Yup.mixed(),
+    // EditorRate: Yup.mixed(),
+    // BiletinialRate: Yup.mixed(),
+    // FragmanUrl: Yup.mixed(),
     MobilImageFile: Yup.mixed().required(t('requiredField')),
   });
 
@@ -89,10 +88,10 @@ export default function UserNewEditForm({ currentUser }) {
       StartDate: new Date(),
       EndDate: new Date(),
       Url: '',
-      FilmId: '',
-      EditorRate: '',
-      BiletinialRate: '',
-      FragmanUrl: '',
+      // FilmId: '',
+      // EditorRate: '',
+      // BiletinialRate: '',
+      // FragmanUrl: '',
       ButtonText: '',
       ImageFile: null,
       MobilImageFile: null,
@@ -120,27 +119,20 @@ export default function UserNewEditForm({ currentUser }) {
 
   useEffect(() => {
     if (id) {
-      setValue('Id', sliderId?.id);
-      setValue('Title', sliderId?.title);
-      setValue('Description', sliderId?.description);
-      setValue('StartDate', parseISO(sliderId?.startDate) );
-      setValue('EndDate', parseISO(sliderId?.endDate));
-      setValue('Url', sliderId?.url);
-      setValue('ButtonText', sliderId?.buttonText);
-      setValue('ImageFile', sliderId?.imageUrl);
-      setValue('MobilImageFile', sliderId?.MobilImageFile);
-      setValue('FilmId', sliderId?.FilmId);
-      setValue('EditorRate', sliderId?.EditorRate);
-      setValue('BiletinialRate', sliderId?.BiletinialRate);
-      setValue('FragmanUrl', sliderId?.BiletinialRate);
-      setValue('Language', languages?.find(item => item.id ===sliderId?.language)?.id || '' );
+      setValue('FilmId', popupID?.id);
+      setValue('Title', popupID?.title);
+      setValue('Content', popupID?.description);
+      setValue('StartDate', parseISO(popupID?.startDate) );
+      setValue('EndDate', parseISO(popupID?.endDate));
+      setValue('Url', popupID?.url);
+      setValue('ImageFile', popupID?.imageUrl);
     }
-  }, [sliderId, setValue, id,languages]);
+  }, [popupID, setValue, id,languages]);
 
   const onSubmit = useCallback(async () => {
     const isForm = true
     if (id) {
-      const response = await WebServices.UpdateSlider(values,isForm);
+      const response = await WebServices.UpdatePopup(values,isForm);
       if (response.success) {
         reset();
         router.push(paths.dashboard.managamet.slider.root);
@@ -149,7 +141,7 @@ export default function UserNewEditForm({ currentUser }) {
         enqueueSnackbar(t('errorMsg'), { variant: 'error' });
       }
     } else {
-      const response = await WebServices.CreateSlider(values,isForm);
+      const response = await WebServices.CreatePopup(values,isForm);
       if (response.success) {
         // reset();
         router.push(paths.dashboard.managamet.slider.root);
@@ -196,7 +188,7 @@ export default function UserNewEditForm({ currentUser }) {
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
             <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
-              <Typography variant="h5">Masaüstü Görsel</Typography>
+              <Typography variant="h5">Görsel</Typography>
               <RHFUploadAvatar
                 name="ImageFile"
                 maxSize={3145728}
@@ -218,30 +210,6 @@ export default function UserNewEditForm({ currentUser }) {
                 }
               />
             </Box>
-            <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
-            <Typography variant="h5">Mobil Görsel</Typography>
-              <RHFUploadAvatar
-                name="MobilImageFile"
-                maxSize={3145728}
-                onDrop={handleDrop2}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 3,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.disabled',
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-
 
           </Card>
         </Grid>
@@ -260,9 +228,6 @@ export default function UserNewEditForm({ currentUser }) {
               <RHFTextField name="Title" label={t('name')} />
               <RHFTextField name="Description" label={t('desc')} />
               <RHFTextField name="FilmId" label='Film ID' />
-              <RHFTextField name="EditorRate" label='Editör Puanı' />
-              <RHFTextField name="BiletinialRate" label='Biletinial Puanı' />
-              <RHFTextField name="FragmanUrl" label='Fragman' />
               <Stack spacing={1.5}>
                 <Controller
                   name="StartDate"

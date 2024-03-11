@@ -129,6 +129,11 @@ export const paths = {
         add: `${ROOTS.DASHBOARD}/management/slider/add-slider`,
         edit: (id) => `${ROOTS.DASHBOARD}/management/slider/${id}/edit`,
       },
+      popup: {
+        root: `${ROOTS.DASHBOARD}/management/popup`,
+        add: `${ROOTS.DASHBOARD}/management/popup/add-popup`,
+        edit: (id) => `${ROOTS.DASHBOARD}/management/popup/${id}/edit`,
+      },
       content: {
         root: `${ROOTS.DASHBOARD}/management/content-page`,
         add: `${ROOTS.DASHBOARD}/management/content-page/add-content`,

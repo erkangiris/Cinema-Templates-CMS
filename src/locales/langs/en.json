@@ -20,8 +20,8 @@
   "siteSettings" : "Settings",
 
   "requiredField" : "Required field",
-
-  
+  "popupPage":"Add Popup",
+  "popupManagement":"Popup Management",
 
   "addNew": "Add New",
   "edit": "Edit",

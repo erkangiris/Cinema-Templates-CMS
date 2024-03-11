@@ -104,21 +104,21 @@ export default function UserNewEditForm() {
   useEffect(() => {
     if (id) {
       setValue('id', branchIdData?.id || '');
-      setValue('BranchName', branchIdData?.branchName || '');
-      setValue('BranchDescription', branchIdData?.branchDescription || '');
+      setValue('BranchName', branchIdData?.name || '');
+      setValue('BranchDescription', branchIdData?.description || '');
       setValue('Address', branchIdData?.address || '');
       setValue('Phone', branchIdData?.phone || '');
       setValue('Email', branchIdData?.email || '');
       setValue('Location', branchIdData?.location || '');
       setValue('biletinialBranchId', branchIdData?.biletinialBranchId || '');
-      // setValue(
-      //   'BiletinialBranchId',
-      //   allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name ||
-      //     'Şube Silinmiş ve ya Bulunamadı'
-      // );
-      // setSelectetBranchId(
-      //   allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name || null
-      // );
+      setValue(
+        'BiletinialBranchId',
+        allBranchs?.find((item) => item.id === branchIdData?.biletinialBranchId)?.name ||
+          'Şube Silinmiş ve ya Bulunamadı'
+      );
+      setSelectetBranchId(
+        allBranchs?.find((item) => item.id === branchIdData?.id)?.name || null
+      );
       setValue('ImageFile', branchIdData?.imageUrl || '-');
     }
   }, [branchIdData, setValue, id, allBranchs]);

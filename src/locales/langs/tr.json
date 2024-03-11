@@ -18,12 +18,12 @@
   "bulten": "E-Bülten Listesi",
 
   "siteSettings": "Ayarlar",
-
+  "popupPage":"Popup Ekle",
   "addNew": "Yeni Ekle",
   "edit": "Düzenle",
   "delete": "Sil",
   "cancel": "İptal",
-
+  "popupManagement":"Popup Yönetimi",
   "requiredField" : "Zorunlu Alan",
 
   "successMsg": "İşlem Başarılı",

@@ -26,6 +26,11 @@ const AddSlider = lazy(() => import('src/pages/dashboard/_content_settings/slide
 const EditSlider = lazy(() => import('src/pages/dashboard/_content_settings/slider/edit_slider'));
 
 
+// ** Popup Settings
+const PopupPage = lazy(() => import('src/pages/dashboard/_content_settings/popup/Home'));
+const AddPopup = lazy(() => import('src/pages/dashboard/_content_settings/popup/add_popup'));
+const EditPopup = lazy(() => import('src/pages/dashboard/_content_settings/popup/edit_popup'));
+
 // ** Content Settings
 const ContentPages = lazy(() => import('src/pages/dashboard/_content_settings/content-pages/Home'));
 const AddContentPages = lazy(() => import('src/pages/dashboard/_content_settings/content-pages/add_content'));
@@ -159,6 +164,14 @@ export const dashboardRoutes = [
               { element: <SliderPage />, index: true },
               { path: 'add-slider', element: <AddSlider /> },
               { path: ':id/edit', element: <EditSlider /> }
+            ],
+          },
+          {
+            path: 'popup',
+            children: [
+              { element: <PopupPage />, index: true },
+              { path: 'add-popup', element: <AddPopup /> },
+              { path: ':id/edit', element: <EditPopup /> }
             ],
           },
           {

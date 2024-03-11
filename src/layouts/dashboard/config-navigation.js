@@ -81,6 +81,7 @@ export function useNavData() {
             children: [
               { title: t('bannerManagement'), path: paths.dashboard.managamet.banner.root },
               { title: t('sliderPage'), path: paths.dashboard.managamet.slider.root },
+              { title: t('popupPage'), path: paths.dashboard.managamet.popup.root },
               { title: t('contentPages'), path: paths.dashboard.managamet.content.root },
               { title: t('campaign'), path: paths.dashboard.managamet.offer.root },
               { title: t('nextProgram'), path: paths.dashboard.managamet.next_program },
