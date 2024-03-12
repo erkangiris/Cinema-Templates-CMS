@@ -6,7 +6,7 @@ import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcru
 
 import { paths } from 'src/routes/paths';
 
-import AddEditForm from 'src/components/_dash/Slider/Add-Edit/add-edit'
+import AddEditForm from 'src/components/_dash/Popup/Add-Edit/add-edit'
 import { useSettingsContext } from 'src/components/settings';
 import { useLocales } from 'src/locales';
 
@@ -20,7 +20,6 @@ export default function BannerManagement() {
           links={[
             { name: t('home'), href: paths.dashboard.branchs.root },
             { name: t('contentSettings'),href: paths.dashboard.managamet.banner.root},
-            { name: t('sliderPage'),href: paths.dashboard.managamet.slider.root },
             { name: t('edit')},
           ]}
           sx={{

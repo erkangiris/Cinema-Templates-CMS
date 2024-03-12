@@ -40,17 +40,17 @@ export default function UserNewEditForm({ currentUser }) {
   const { t } = useLocales();
 
   const [popupID, setpopupID] = useState(null);
-  const [languages, setLanguages] = useState([]);
+  const [filmList, setFilmList] = useState([]);
 
 
   const fetchData = async () => {
-    const { data } = await WebServices.getpopupID({id });
+    const { data } = await WebServices.getAllPopups({ Id:id });
     setpopupID(data);
   };
 
   const fetchDataLanguages = async () => {
-    const { data } = await WebServices.getAllLanguages();
-    setLanguages(data);
+    const { data } = await WebServices.getAllVision();
+    setFilmList(data);
   };
 
   useEffect(() => {
@@ -61,22 +61,20 @@ export default function UserNewEditForm({ currentUser }) {
   }, []);
 
 
+  const allfilm_id =[
+    {id:1, film:'Avatar Suyun Yolu'},
+    {id:2, film:'Dune Çöl Gezegeni'}
+  ]
+
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
     Title: Yup.string().required(t('requiredField')),
-    Description: Yup.string().required(t('requiredField')),
-    StartDate: Yup.date().required(t('requiredField')).typeError(''),
-    EndDate: Yup.date().required(t('requiredField')).typeError(''),
-    Url: Yup.string().required(t('requiredField')),
-    ButtonText: Yup.string().required(t('requiredField')),
-    Language: Yup.string().required(t('requiredField')),
-    ImageFile: Yup.mixed().required(t('requiredField')),
-    // FilmId: Yup.mixed(),
-    // EditorRate: Yup.mixed(),
-    // BiletinialRate: Yup.mixed(),
-    // FragmanUrl: Yup.mixed(),
-    MobilImageFile: Yup.mixed().required(t('requiredField')),
+    Content: Yup.string().required(t('requiredField')),
+    StartDate: Yup.date(),
+    EndDate: Yup.date(),
+    ImageUrl: Yup.mixed(),
+    FilmId: Yup.mixed(),
   });
 
 
@@ -84,20 +82,12 @@ export default function UserNewEditForm({ currentUser }) {
   const defaultValues = useMemo(
     () => ({
       Title: '',
-      Description: '',
+      Content: '',
       StartDate: new Date(),
       EndDate: new Date(),
-      Url: '',
-      // FilmId: '',
-      // EditorRate: '',
-      // BiletinialRate: '',
-      // FragmanUrl: '',
-      ButtonText: '',
-      ImageFile: null,
-      MobilImageFile: null,
-      Language: '',
+      FilmId: '',
+      ImageUrl: null,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
   );
 
@@ -121,36 +111,37 @@ export default function UserNewEditForm({ currentUser }) {
     if (id) {
       setValue('FilmId', popupID?.id);
       setValue('Title', popupID?.title);
-      setValue('Content', popupID?.description);
-      setValue('StartDate', parseISO(popupID?.startDate) );
+      setValue('Content', popupID?.content);
+      setValue('StartDate', parseISO(popupID?.startDate));
       setValue('EndDate', parseISO(popupID?.endDate));
-      setValue('Url', popupID?.url);
-      setValue('ImageFile', popupID?.imageUrl);
+      setValue('ImageUrl', popupID?.imageUrl);
     }
-  }, [popupID, setValue, id,languages]);
+  }, [popupID, setValue, id]);
 
   const onSubmit = useCallback(async () => {
+    
     const isForm = true
     if (id) {
-      const response = await WebServices.UpdatePopup(values,isForm);
+      const response = await WebServices.updatePopup(values, isForm);
       if (response.success) {
         reset();
-        router.push(paths.dashboard.managamet.slider.root);
+        router.push(paths.dashboard.managamet.popup.root);
         enqueueSnackbar(t('successMsg'));
       } else {
         enqueueSnackbar(t('errorMsg'), { variant: 'error' });
       }
     } else {
-      const response = await WebServices.CreatePopup(values,isForm);
+      console.log('sss')
+      const response = await WebServices.createPopup(values, isForm);
       if (response.success) {
         // reset();
-        router.push(paths.dashboard.managamet.slider.root);
+        router.push(paths.dashboard.managamet.popup.root);
         enqueueSnackbar(t('successMsg'));
       } else {
         enqueueSnackbar(t('errorMsg'), { variant: 'error' });
       }
     }
-  }, [reset, id, values, enqueueSnackbar, router,t]);
+  }, [reset, id, values, enqueueSnackbar, router, t]);
 
 
 
@@ -163,34 +154,21 @@ export default function UserNewEditForm({ currentUser }) {
       });
 
       if (file) {
-        setValue('ImageFile', newFile, { shouldValidate: true });
+        setValue('ImageUrl', newFile);
       }
     },
     [setValue]
   );
-  const handleDrop2 = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0];
-
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
-
-      if (file) {
-        setValue('MobilImageFile', newFile, { shouldValidate: true });
-      }
-    },
-    [setValue]
-  );
+ 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
+            <Box sx={{ mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
               <Typography variant="h5">Görsel</Typography>
               <RHFUploadAvatar
-                name="ImageFile"
+                name="ImageUrl"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 helperText={
@@ -226,8 +204,19 @@ export default function UserNewEditForm({ currentUser }) {
               }}
             >
               <RHFTextField name="Title" label={t('name')} />
-              <RHFTextField name="Description" label={t('desc')} />
-              <RHFTextField name="FilmId" label='Film ID' />
+              <RHFSelect
+                native
+                name="FilmId"
+                label={`${t('filmid')} ${t('type')}`}
+                InputLabelProps={{ shrink: true }}
+              >
+                <option value="">{`${t('filmid')} ${t('choose')}`}</option>
+                {allfilm_id?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.film}
+                  </option>
+                ))}
+              </RHFSelect>
               <Stack spacing={1.5}>
                 <Controller
                   name="StartDate"
@@ -270,22 +259,11 @@ export default function UserNewEditForm({ currentUser }) {
                 />
               </Stack>
 
-              <RHFTextField name="Url" label={t('link')} />
-              <RHFTextField name="ButtonText" label={`${t('button')} ${t('text')}`} />
-              <RHFSelect
-                native
-                name="Language"
-                label={`${t('language')} ${t('type')}`}
-                InputLabelProps={{ shrink: true }}
-              >
-                <option value="">{`${t('language')} ${t('choose')}`}</option>
-                {languages?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </RHFSelect>
+    
             </Box>
+            <Box sx={{ mt: 3 }}>              
+              <RHFTextField name="Content" label={t('desc')} />
+              </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
@@ -295,7 +273,7 @@ export default function UserNewEditForm({ currentUser }) {
           </Card>
         </Grid>
       </Grid>
-      {/* <code>{JSON.stringify(values, null, 2)}</code> */}
+      <code>{JSON.stringify(values, null, 2)}</code>
     </FormProvider>
   );
 }

@@ -22,7 +22,7 @@
   "requiredField" : "Required field",
   "popupPage":"Add Popup",
   "popupManagement":"Popup Management",
-
+  "filmid":"FilmID",
   "addNew": "Add New",
   "edit": "Edit",
   "delete": "Delete",

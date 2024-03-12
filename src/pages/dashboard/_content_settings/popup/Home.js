@@ -10,7 +10,7 @@ import Iconify from 'src/components/iconify/iconify';
 import { useSettingsContext } from 'src/components/settings';
 import { useLocales } from 'src/locales';
 import { WebServices } from 'src/utils/requests';
-import SliderList from "../../../../components/_dash/Slider/Home/SliderList"
+import SliderList from "../../../../components/_dash/Popup/Home/SliderList"
 
 export default function ContentPages() {
 
@@ -22,11 +22,10 @@ export default function ContentPages() {
   const [res_data, setRes_data] = useState([])
   
   async function fetchData() {
-    const { data } = await WebServices.GetAllPopups();
+    const { data } = await WebServices.getAllPopups();
     setRes_data(data)
   }
 
-  console.log(res_data,"popup res")
   
   useEffect(() => {
     fetchData();
@@ -45,7 +44,7 @@ export default function ContentPages() {
           action={
             <Button
               component={RouterLink}
-              href={paths.dashboard.managamet.slider.add}
+              href={paths.dashboard.managamet.popup.add}
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >

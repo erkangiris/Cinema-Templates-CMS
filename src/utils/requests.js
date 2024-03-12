@@ -111,6 +111,19 @@ const WebServices = {
   UpdateSlider: (params, isForm) => WebServices.put('Slider/Update', params, isForm),
   DeleteSlider: (params) => WebServices.delete(`Slider/Delete/${params.Id}`),
 
+
+// ** Popup
+  getAllPopups: (params) => WebServices.get(`Popup/GetAllPopups`, params),
+  getPopupByFilmId: (params) => WebServices.get(`Popup/GetPopupByFilmId`, params),
+  createPopup: (params, isForm) => WebServices.post('Popup/createPopup', params, isForm),
+  updatePopup: (params, isForm) => WebServices.put('Popup/UpdatePopup', params, isForm),
+  deletePopup: (params) => WebServices.delete(`Popup/Delete/${params.Id}`),
+
+
+
+
+  getAllVision: (params) => WebServices.get(`Cinema/Visions?CinemaId=9`, params),
+
   // ** NextProgram
   getAllNextPrograms: (params) => WebServices.get('Cinema/NextProgram', params),
   getAllCinemaNextProgram: (params) => WebServices.get('NextProgram/Get', params),

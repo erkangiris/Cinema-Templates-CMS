@@ -25,7 +25,7 @@
   "cancel": "İptal",
   "popupManagement":"Popup Yönetimi",
   "requiredField" : "Zorunlu Alan",
-
+  "filmid":"FilmID",
   "successMsg": "İşlem Başarılı",
   "errorMsg" : "Hatalı İşlem",
 
