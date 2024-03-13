@@ -153,7 +153,7 @@ export default function UserNewEditForm() {
         <Grid xs={12} md={4} sx={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
             <Box sx={{ mb: 5 }}>
-              <Typography variant="subtitle2">Ana Resim</Typography>
+              <Typography variant="subtitle2">{t('image')}</Typography>
               <RHFUploadAvatar
                 name="ImageFile"
                 maxSize={3145728}

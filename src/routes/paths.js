@@ -109,7 +109,7 @@ export const paths = {
       file: `${ROOTS.DASHBOARD}/file`,
     },
 
-    // ** eklediklerim
+    // ** {t('add')}diklerim
 
     branchs : {
       root: `${ROOTS.DASHBOARD}/branchs`,
@@ -163,7 +163,7 @@ export const paths = {
     
     settings : `${ROOTS.DASHBOARD}/settings`,
 
-    // ** eklediklerim
+    // ** {t('add')}diklerim
 
 
     user: {

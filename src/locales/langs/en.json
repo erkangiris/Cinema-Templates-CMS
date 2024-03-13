@@ -16,7 +16,7 @@
   "members" :  "Members",
   "adminUser" :  "Admin User",
   "bulten" :  "E-Bulletin",
-
+  "add":"Add",
   "siteSettings" : "Settings",
 
   "requiredField" : "Required field",
@@ -32,7 +32,7 @@
 
   "successMsg": "Successful",
   "errorMsg" : "Wrong",
-
+  "image":"Image",
   "name": "Name",
   "desc": "Description",
   "tel": "Telephone",

@@ -35,7 +35,7 @@ export default function Table(theme) {
     MuiTableCell: {
       styleOverrides: {
         root: {
-          // colum sonrası ekledim
+          // colum sonrası {t('add')}dim
           paddingLeft: 36,
           borderBottomStyle: 'dashed',
         },

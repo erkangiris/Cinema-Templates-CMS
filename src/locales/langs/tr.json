@@ -18,10 +18,11 @@
   "bulten": "E-Bülten Listesi",
 
   "siteSettings": "Ayarlar",
-  "popupPage":"Popup Ekle",
-  "addNew": "Yeni Ekle",
+  "popupPage":"Popup {t('add')}",
+  "addNew": "Yeni {t('add')}",
   "edit": "Düzenle",
   "delete": "Sil",
+  "add":"{t('add')}",
   "cancel": "İptal",
   "popupManagement":"Popup Yönetimi",
   "requiredField" : "Zorunlu Alan",
@@ -32,7 +33,7 @@
   "logOut": "Çıkış",
   
   "narrow": "Daralt",
-
+  "image":"Görsel",
 
   "name": "Adı",
   "desc": "Açıklama",

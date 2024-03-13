@@ -66,7 +66,7 @@ const WebServices = {
       return response.data;
     } catch (error) {
       console.error(error);
-      // Hata durumunda yapmak istediğiniz işlemleri burada gerçekleştirebilirsiniz.
+      // Hata durumunda yapmak istediğiniz işlemleri burada gerç{t('add')}ştirebilirsiniz.
       throw error; // İsteğe bağlı olarak hatayı yeniden fırlatabilirsiniz.
     }
   },

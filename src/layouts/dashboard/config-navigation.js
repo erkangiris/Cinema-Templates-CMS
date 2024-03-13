@@ -231,7 +231,7 @@ export function useNavData() {
         // subheader: t('overview'),
         items: [
           // { title: t('app'), path: paths.dashboard.root, icon: ICONS.dashboard },
-          { title: t('siteSettings'), path: paths.dashboard.settings, icon: ICONS.lock },
+          // { title: t('siteSettings'), path: paths.dashboard.settings, icon: ICONS.lock },
           // { title: t('ecommerce'), path: paths.dashboard.general.ecommerce, icon: ICONS.ecommerce },
           // { title: t('analytics'), path: paths.dashboard.general.analytics, icon: ICONS.analytics },
           // { title: t('addbranch'), path: paths.dashboard.addbranch, icon: ICONS.analytics },
