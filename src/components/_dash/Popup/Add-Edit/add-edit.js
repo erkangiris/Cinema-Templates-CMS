@@ -41,42 +41,31 @@ export default function UserNewEditForm({ currentUser }) {
 
   const [popupID, setpopupID] = useState(null);
   const [filmList, setFilmList] = useState([]);
+  const [currentpopup, setcurrentpopup] = useState([]);
 
 
   const fetchData = async () => {
     const { data } = await WebServices.getAllPopups({ Id:id });
+    const { data:currentpop } = await WebServices.getPopupById({ Id:id });
+    const { data:filmdata } = await WebServices.getFilmList();
     setpopupID(data);
+    setFilmList(filmdata);
+    setcurrentpopup(currentpop);
   };
 
-  const fetchDataLanguages = async () => {
-    const { data } = await WebServices.getAllVision();
-    setFilmList(data);
-  };
 
   useEffect(() => {
-    if (id) {
       fetchData();
-    }
-    fetchDataLanguages()
   }, []);
 
-
-  const allfilm_id =[
-    {id:1, film:'Avatar Suyun Yolu'},
-    {id:2, film:'Dune Çöl Gezegeni'}
-  ]
-
   const { enqueueSnackbar } = useSnackbar();
-
   const NewUserSchema = Yup.object().shape({
     Title: Yup.string().required(t('requiredField')),
     Content: Yup.string().required(t('requiredField')),
     StartDate: Yup.date(),
     EndDate: Yup.date(),
-    ImageUrl: Yup.mixed(),
     FilmId: Yup.mixed(),
   });
-
 
 
   const defaultValues = useMemo(
@@ -86,7 +75,6 @@ export default function UserNewEditForm({ currentUser }) {
       StartDate: new Date(),
       EndDate: new Date(),
       FilmId: '',
-      ImageUrl: null,
     }),
     [currentUser]
   );
@@ -109,20 +97,22 @@ export default function UserNewEditForm({ currentUser }) {
 
   useEffect(() => {
     if (id) {
-      setValue('FilmId', popupID?.id);
-      setValue('Title', popupID?.title);
-      setValue('Content', popupID?.content);
-      setValue('StartDate', parseISO(popupID?.startDate));
-      setValue('EndDate', parseISO(popupID?.endDate));
-      setValue('ImageUrl', popupID?.imageUrl);
+      setValue('Id', Number(id));
+      setValue('FilmId', currentpopup?.FilmId);
+      setValue('Title', currentpopup?.title);
+      setValue('Content', currentpopup?.content);
+      setValue('StartDate', parseISO(currentpopup?.startDate));
+      setValue('EndDate', parseISO(currentpopup?.endDate));
+      setValue('imageUrl', currentpopup?.imageUrl);
     }
-  }, [popupID, setValue, id]);
+  }, [currentpopup, setValue, id]);
 
   const onSubmit = useCallback(async () => {
     
     const isForm = true
     if (id) {
       const response = await WebServices.updatePopup(values, isForm);
+      console.log(values)
       if (response.success) {
         reset();
         router.push(paths.dashboard.managamet.popup.root);
@@ -131,8 +121,7 @@ export default function UserNewEditForm({ currentUser }) {
         enqueueSnackbar(t('errorMsg'), { variant: 'error' });
       }
     } else {
-      console.log('sss')
-      const response = await WebServices.createPopup(values, isForm);
+       const response = await WebServices.createPopup(values, isForm);
       if (response.success) {
         // reset();
         router.push(paths.dashboard.managamet.popup.root);
@@ -154,11 +143,12 @@ export default function UserNewEditForm({ currentUser }) {
       });
 
       if (file) {
-        setValue('ImageUrl', newFile);
+        setValue('imageUrl', newFile);
       }
     },
     [setValue]
   );
+
  
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -168,7 +158,7 @@ export default function UserNewEditForm({ currentUser }) {
             <Box sx={{ mb: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
               <Typography variant="h5">Görsel</Typography>
               <RHFUploadAvatar
-                name="ImageUrl"
+                name="imageUrl"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 helperText={
@@ -211,9 +201,9 @@ export default function UserNewEditForm({ currentUser }) {
                 InputLabelProps={{ shrink: true }}
               >
                 <option value="">{`${t('filmid')} ${t('choose')}`}</option>
-                {allfilm_id?.map((item) => (
+                {filmList?.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.film}
+                    {item.name}
                   </option>
                 ))}
               </RHFSelect>
