@@ -19,7 +19,7 @@ import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export default function BranchTable({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
+export default function BranchTable({ row, selected, onEditRow, onSelectRow, onDeleteRow, onTranslateRow }) {
   const { name, phone, address,imageUrl} = row;
 
   const confirm = useBoolean();
@@ -77,6 +77,18 @@ export default function BranchTable({ row, selected, onEditRow, onSelectRow, onD
           <Iconify icon="solar:pen-bold" />
           {t('edit')}
         </MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            onTranslateRow();
+            popover.onClose();
+          }}
+        >
+          <Iconify icon="solar:global-linear" />
+          {t('translate')}
+        </MenuItem>
+
+
       </CustomPopover>
 
       <ConfirmDialog
@@ -98,6 +110,7 @@ BranchTable.propTypes = {
   onDeleteRow: PropTypes.func,
   onEditRow: PropTypes.func,
   onSelectRow: PropTypes.func,
+  onTranslateRow: PropTypes.func,
   row: PropTypes.object,
   selected: PropTypes.bool,
 };

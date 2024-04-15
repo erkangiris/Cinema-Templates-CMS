@@ -32,7 +32,9 @@
   "logOut": "Çıkış",
   
   "narrow": "Daralt",
-
+  "login":"Giriş Yap",
+  "password":"Şifre",
+  "email_address":"E-Posta Adresi",
 
   "name": "Adı",
   "desc": "Açıklama",

@@ -142,6 +142,15 @@ export default function UserListView({ data }) {
   );
 
 
+  const handleTranslateRow = useCallback(
+    (id) => {
+      router.push(paths.dashboard.branchs.translate(id));
+    },
+    [router]
+  );
+
+
+
   const handleResetFilters = useCallback(() => {
     setFilters(defaultFilters);
   }, []);
@@ -221,6 +230,7 @@ export default function UserListView({ data }) {
                       onSelectRow={() => table.onSelectRow(row.id)}
                       onDeleteRow={() => handleDeleteRow(row.id)}
                       onEditRow={() => handleEditRow(row.id)}
+                      onTranslateRow={() => handleTranslateRow(row.id)}
                     />
                   ))}
 

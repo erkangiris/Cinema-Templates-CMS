@@ -20,10 +20,12 @@ import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
+  const { t } = useLocales();
   const { login } = useAuthContext();
 
   // const [errorMsg, setErrorMsg] = useState('');
@@ -36,13 +38,13 @@ export default function JwtLoginView() {
   const password = useBoolean();
 
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().required('Kullanıcı Adı ve ya E-posta Zorunlu'),
-    password: Yup.string().required('Şifre Zorunlu'),
+    username: Yup.string().required(t('email_required')),
+    password: Yup.string().required(t('password_required')),
   });
 
   const defaultValues = {
-    username: 'cinemapinkapi@biletinial.com',
-    password: '4574747',
+    username: '',
+    password: '',
   };
 
   const methods = useForm({
@@ -94,11 +96,11 @@ export default function JwtLoginView() {
         isError && <Alert severity="error">Kullanıcı adı ve ya şifre hatalı !</Alert>
       }
 
-      <RHFTextField name="username" label="Kullanıcı Adı ve ya E-posta" />
+      <RHFTextField name="username" label={t('email_address')} />
 
       <RHFTextField
         name="password"
-        label="Şifre"
+        label={t('password')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -123,7 +125,7 @@ export default function JwtLoginView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Giriş Yap
+        {t('login')}
       </LoadingButton>
       
       

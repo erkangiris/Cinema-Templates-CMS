@@ -28,7 +28,9 @@
   "delete": "Delete",
   "cancel": "Cancel",
   "logOut": "Log Out",
-
+  "login":"Login",
+  "password":"Password",
+  "email_address":"E-Mail Address",
 
   "successMsg": "Successful",
   "errorMsg" : "Wrong",

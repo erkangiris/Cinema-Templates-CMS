@@ -115,6 +115,7 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/branchs`,
       add : `${ROOTS.DASHBOARD}/branchs/add-branchs`,
       edit: (id) => `${ROOTS.DASHBOARD}/branchs/${id}/edit`,
+      translate: (id) => `${ROOTS.DASHBOARD}/branchs/${id}/translate`,
     },
 
     managamet: {

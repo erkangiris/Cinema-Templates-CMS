@@ -81,6 +81,8 @@ const WebServices = {
   CreateBranch: (params, isForm) => WebServices.post('Branch/Create', params, isForm),
   UpdateBranch: (params, isForm) => WebServices.put('Branch/Update', params, isForm),
   DeleteBranch: (params) => WebServices.delete(`Branch/Delete/${params.Id}`),
+  CreateBranchLang: (params, isForm) => WebServices.post('BranchLang/Create', params, isForm),
+  UpdateBranchLang: (params, isForm) => WebServices.put('BranchLang/Update', params, isForm),
 
   // ** Banners
   getAllBanners: (params) => WebServices.get('Banner/Get', params),

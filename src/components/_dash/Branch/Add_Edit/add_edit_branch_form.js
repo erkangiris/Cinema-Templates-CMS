@@ -131,9 +131,7 @@ export default function UserNewEditForm() {
     const isForm = true;
     if (id) {
       const newValues = { ...values, BiletinialBranchId: selectedBranchId };
-      // console.log('new eidt values', newValues);
       const response = await WebServices.UpdateBranch(newValues, isForm);
-      // console.log('edit branch res = ', response);
       if (response.success) {
         reset();
         router.push(paths.dashboard.branchs.root);

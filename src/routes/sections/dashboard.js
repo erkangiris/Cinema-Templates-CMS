@@ -6,6 +6,7 @@ import { AuthGuard } from 'src/auth/guard';
 import DashboardLayout from 'src/layouts/dashboard';
 // components
 import { LoadingScreen } from 'src/components/loading-screen';
+import TranslateBranch from 'src/components/_dash/Branch/Add_Edit/translate_branch';
 
 // ----------------------------------------------------------------------
 
@@ -13,6 +14,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 const Branchs = lazy(() => import('src/pages/dashboard/_branchs/Home'));
 const AddBranchs = lazy(() => import('src/pages/dashboard/_branchs/add_branch'));
 const EditBranchs = lazy(() => import('src/pages/dashboard/_branchs/edit_branch'));
+const TranslateBranchs = lazy(() => import('src/pages/dashboard/_branchs/translate_branch'));
 
 // ** Banner Settings
 const BannerContent = lazy(() => import('src/pages/dashboard/_content_settings/banner-management/Home'));
@@ -128,16 +130,15 @@ export const dashboardRoutes = [
     ),
     children: [
       { element: <IndexPage />, index: true },
-      
       {
         path: 'branchs',
         children: [
           { element: <Branchs />, index: true },
           { path: 'add-branchs', element: <AddBranchs /> },
-          { path: ':id/edit', element: <EditBranchs /> }
+          { path: ':id/edit', element: <EditBranchs /> },
+          { path: ':id/translate', element: <TranslateBranch /> }
         ],
       },
-
       { path: 'settings', element: <Settings /> },
       { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },

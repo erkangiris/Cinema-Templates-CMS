@@ -6,17 +6,18 @@ import { enUS, trTR } from '@mui/material/locale';
 
 export const allLangs = [
   {
-    label: 'Türkçe',
-    value: 'tr',
-    systemValue: trTR,
-    icon: 'flagpack:tr',
-  },
-  {
     label: 'English',
     value: 'en',
     systemValue: enUS,
     icon: 'flagpack:gb-nir',
   },
+  {
+    label: 'Türkçe',
+    value: 'tr',
+    systemValue: trTR,
+    icon: 'flagpack:tr',
+  },
+
 ];
 
 export const defaultLang = allLangs[0]; // English
