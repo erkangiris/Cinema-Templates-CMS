@@ -17,8 +17,7 @@ const WebServices = {
       return response.data;
     } catch (error) {
       console.error(error);
-      // Hata durumunda yapmak istediğiniz işlemleri burada gerçekleştirebilirsiniz.
-      throw error; // İsteğe bağlı olarak hatayı yeniden fırlatabilirsiniz.
+      throw error; 
     }
   },
 
@@ -67,7 +66,7 @@ const WebServices = {
       return response.data;
     } catch (error) {
       console.error(error);
-      // Hata durumunda yapmak istediğiniz işlemleri burada gerçekleştirebilirsiniz.
+      // Hata durumunda yapmak istediğiniz işlemleri burada gerç{t('add')}ştirebilirsiniz.
       throw error; // İsteğe bağlı olarak hatayı yeniden fırlatabilirsiniz.
     }
   },
@@ -117,14 +116,16 @@ const WebServices = {
 // ** Popup
   getAllPopups: (params) => WebServices.get(`Popup/GetAllPopups`, params),
   getPopupByFilmId: (params) => WebServices.get(`Popup/GetPopupByFilmId`, params),
+  getPopupById: (params) => WebServices.get(`Popup/GetPopupById`, params),
   createPopup: (params, isForm) => WebServices.post('Popup/createPopup', params, isForm),
-  updatePopup: (params, isForm) => WebServices.put('Popup/UpdatePopup', params, isForm),
+  updatePopup: (params, isForm) => WebServices.post('Popup/UpdatePopup', params, isForm),
   deletePopup: (params) => WebServices.delete(`Popup/Delete/${params.Id}`),
+  getFilmList: (params) => WebServices.get(`Cinema/GetFilmList`, params),
 
 
 
 
-  getAllVision: (params) => WebServices.get(`Cinema/Visions?CinemaId=9`, params),
+  getAllVision: (params) => WebServices.get(`Cinema/Visions`, params),
 
   // ** NextProgram
   getAllNextPrograms: (params) => WebServices.get('Cinema/NextProgram', params),

@@ -151,7 +151,7 @@ export default function UserNewEditForm({ renderData }) {
 
         <Stack>
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-            Ekle
+            {t('add')}
           </LoadingButton>
         </Stack>
       </Stack>

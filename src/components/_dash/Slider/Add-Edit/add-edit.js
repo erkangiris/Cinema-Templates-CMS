@@ -188,7 +188,7 @@ export default function UserNewEditForm({ currentUser }) {
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
             <Box sx={{ mb: 5, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
-              <Typography variant="h5">Görsel</Typography>
+            <Typography variant="h5">{t('image')}</Typography>
               <RHFUploadAvatar
                 name="ImageFile"
                 maxSize={3145728}
