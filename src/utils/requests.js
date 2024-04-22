@@ -7,7 +7,7 @@ const WebServices = {
     
     try {
       
-      const response = await axios.get(`${process.env.REACT_APP_HOST_API + endpoint}`, {
+      const response = await axios.get(`https://contentapi-dev.biletinial.com/api/${endpoint}`, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           XApiKey: `TPJDtRG0cP`,
@@ -23,7 +23,7 @@ const WebServices = {
 
   post: async (endpoint, params, isForm) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_HOST_API + endpoint}`, params, {
+      const response = await axios.post(`https://contentapi-dev.biletinial.com/api/${endpoint}`, params, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           XApiKey: `TPJDtRG0cP`,
@@ -39,7 +39,7 @@ const WebServices = {
 
   put: async (endpoint, params, isForm) => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_HOST_API + endpoint}`, params, {
+      const response = await axios.put(`https://contentapi-dev.biletinial.com/api/${endpoint}`, params, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           XApiKey: `TPJDtRG0cP`,
@@ -55,7 +55,7 @@ const WebServices = {
 
   delete: async (endpoint) => {
     try {
-      const response = await axios.delete(`${process.env.REACT_APP_HOST_API + endpoint}`, {
+      const response = await axios.delete(`https://contentapi-dev.biletinial.com/api/${endpoint}`, {
         
         headers: {
           authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
